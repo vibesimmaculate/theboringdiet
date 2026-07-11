@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /success
+Disallow: /payment-cancelled
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /success
+Disallow: /payment-cancelled
+
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: /sitemap.xml
