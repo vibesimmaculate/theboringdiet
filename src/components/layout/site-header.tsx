@@ -3,6 +3,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { NAV, BRAND } from "@/config/brand";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
+
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
