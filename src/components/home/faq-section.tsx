@@ -18,25 +18,25 @@ export const HOME_FAQ: FAQ[] = [
   { q: "What is the refund policy?", a: "See the Refunds page for the exact policy and any consumer withdrawal rights that may apply to your jurisdiction." },
 ];
 
+const TOP_FAQ = HOME_FAQ.slice(0, 6);
+
 export function HomeFaqSection() {
   return (
-    <section className="bg-bone py-24 sm:py-32">
+    <section className="bg-bone py-14 sm:py-20">
       <div className="editorial-main">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-4">
             <EditorialEyebrow>QUESTIONS</EditorialEyebrow>
-            <h2 className="mt-6 h-section">
-              WHAT YOU<br />PROBABLY<br />ASK<span className="text-gold">.</span>
+            <h2 className="mt-4 h-chapter">
+              QUICK<br />ANSWERS<span className="text-gold">.</span>
             </h2>
-            <p className="mt-6 text-charcoal-soft max-w-xs leading-relaxed">
-              Every answer is public. There is no hidden fee, hidden term or hidden condition.
-            </p>
           </div>
           <div className="col-span-12 md:col-span-8">
-            <EditorialFAQ items={HOME_FAQ} />
+            <EditorialFAQ items={TOP_FAQ} />
           </div>
         </div>
       </div>
     </section>
   );
 }
+
