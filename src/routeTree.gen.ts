@@ -17,6 +17,7 @@ import { Route as RefundsRouteImport } from './routes/refunds'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
+import { Route as PaymentCancelledRouteImport } from './routes/payment-cancelled'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EvidenceRouteImport } from './routes/evidence'
@@ -65,6 +66,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PressRoute = PressRouteImport.update({
   id: '/press',
   path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentCancelledRoute = PaymentCancelledRouteImport.update({
+  id: '/payment-cancelled',
+  path: '/payment-cancelled',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/payment-cancelled'
     | '/press'
     | '/privacy'
     | '/product'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/payment-cancelled'
     | '/press'
     | '/privacy'
     | '/product'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/payment-cancelled'
     | '/press'
     | '/privacy'
     | '/product'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   EvidenceRoute: typeof EvidenceRoute
   FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  PaymentCancelledRoute: typeof PaymentCancelledRoute
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       path: '/press'
       fullPath: '/press'
       preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-cancelled': {
+      id: '/payment-cancelled'
+      path: '/payment-cancelled'
+      fullPath: '/payment-cancelled'
+      preLoaderRoute: typeof PaymentCancelledRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceRoute: EvidenceRoute,
   FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
+  PaymentCancelledRoute: PaymentCancelledRoute,
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
