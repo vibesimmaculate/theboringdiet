@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import coverAsset from "@/assets/cover.png.asset.json";
 
 /**
  * A restrained CSS 3D editorial publication object.
