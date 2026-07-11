@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import coverAsset from "@/assets/cover.png.asset.json";
 
 /**
  * A restrained CSS 3D editorial publication object.
@@ -51,30 +52,18 @@ export function BookMockup({ className, interactive = true }: { className?: stri
           className="absolute top-0 bottom-0 -left-2 w-4 bg-charcoal"
           style={{ transform: "rotateY(-40deg) translateZ(-6px)" }}
         />
-        {/* Front cover */}
+        {/* Front cover — real edition artwork */}
         <div
-          className="absolute inset-0 bg-bone border border-stone shadow-[0_30px_60px_-30px_rgba(17,17,17,0.35)]"
+          className="absolute inset-0 bg-charcoal border border-charcoal shadow-[0_30px_60px_-30px_rgba(17,17,17,0.55)] overflow-hidden"
           style={{ transform: "translateZ(6px)" }}
         >
-          <div className="h-full flex flex-col p-6 sm:p-8">
-            <div>
-              <div className="mono-label">A BOUNDED EXPERIMENT</div>
-              <div className="mono-label">IN EATING SIMPLY</div>
-            </div>
-            <div className="mt-8 sm:mt-10 flex-1">
-              <div className="h-px bg-charcoal w-full" />
-              <h3 className="mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-[0.9]">
-                THE<br />BORING<br />DIET<span className="text-gold">.</span>
-              </h3>
-            </div>
-            <div className="mt-8 flex items-end justify-between">
-              <div className="font-serif italic text-sm text-charcoal-soft leading-tight">
-                Two foods.<br />Fourteen days.<br />Then stop.
-              </div>
-              <div className="bg-charcoal text-bone mono-label text-[9px] px-2 py-1">EDITION 1.0</div>
-            </div>
-            <div className="mt-6 mono-label text-stone-dark">DIGITAL EDITION</div>
-          </div>
+          <img
+            src={coverAsset.url}
+            alt="The Boring Diet — Edition 1.0 cover: I only ate potatoes and eggs for 14 days"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute top-3 right-3 bg-bone text-charcoal mono-label text-[9px] px-2 py-1">EDITION 1.0</div>
         </div>
         {/* Page block edge */}
         <div className="absolute inset-y-2 -right-1.5 w-1.5 bg-stone" aria-hidden="true" />
