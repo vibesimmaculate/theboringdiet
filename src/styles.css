@@ -56,18 +56,19 @@
 }
 
 :root {
-  /* Brand palette */
-  --bone: #f5f3ed;
-  --paper: #faf8f2;
-  --surface: #eeeae1;
-  --charcoal: #111111;
-  --charcoal-soft: #24231f;
-  --stone: #c9c3b7;
-  --stone-dark: #777168;
-  --gold: #b89b5e;
-  --gold-light: #e8dec7;
-  --red: #8b3a32;
-  --deep: #0e0e0d;
+  /* Brand palette — eggshell, egg yolk, potato */
+  --bone: #f4ecd8;         /* eggshell */
+  --paper: #faf3e0;        /* pale eggshell */
+  --surface: #ede0c3;      /* warm cream */
+  --charcoal: #2a1e12;     /* roasted potato brown-black */
+  --charcoal-soft: #3d2b1a;
+  --stone: #c9a878;        /* potato tan */
+  --stone-dark: #6b4423;   /* potato skin */
+  --gold: #e8b923;         /* egg yolk */
+  --gold-light: #f5db8a;   /* soft yolk */
+  --red: #a0522d;          /* baked sienna */
+  --deep: #1a0f06;         /* deep roast */
+
 
   /* shadcn semantic map */
   --radius: 2px;
