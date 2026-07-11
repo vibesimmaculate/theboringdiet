@@ -20,11 +20,13 @@ export function PolarCheckoutTrigger({
   children,
   analyticsId,
   size = "primary",
+  compact = false,
 }: {
   className?: string;
   children?: ReactNode;
   analyticsId?: string;
   size?: "primary" | "outline";
+  compact?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -56,25 +58,31 @@ export function PolarCheckoutTrigger({
 
   const label = children || "GET INSTANT ACCESS — $19";
 
+  const button = (
+    <button
+      ref={btnRef}
+      onClick={onClick}
+      disabled={loading}
+      aria-busy={loading}
+      data-analytics={analyticsId}
+      className={cn(size === "primary" ? "btn-primary" : "btn-outline", compact ? "" : "w-full sm:w-auto", className)}
+    >
+      {loading ? (
+        <>
+          <span className="inline-block w-3 h-3 border border-bone border-t-transparent rounded-full animate-spin" />
+          OPENING…
+        </>
+      ) : (
+        label
+      )}
+    </button>
+  );
+
+  if (compact) return button;
+
   return (
-    <div className={cn("inline-flex flex-col items-start", className)}>
-      <button
-        ref={btnRef}
-        onClick={onClick}
-        disabled={loading}
-        aria-busy={loading}
-        data-analytics={analyticsId}
-        className={cn(size === "primary" ? "btn-primary" : "btn-outline", "w-full sm:w-auto")}
-      >
-        {loading ? (
-          <>
-            <span className="inline-block w-3 h-3 border border-bone border-t-transparent rounded-full animate-spin" />
-            OPENING SECURE CHECKOUT…
-          </>
-        ) : (
-          label
-        )}
-      </button>
+    <div className="inline-flex flex-col items-start">
+      {button}
       <div className="mt-2 mono-label text-stone-dark">$19 USD · ONE TIME · DIGITAL DELIVERY</div>
       <div className="mono-label text-stone-dark text-[10px]">
         No subscription · No account required
@@ -82,6 +90,7 @@ export function PolarCheckoutTrigger({
     </div>
   );
 }
+
 
 export function CheckoutSecureLabel() {
   return <div className="mono-label text-stone-dark">SECURE CHECKOUT · POWERED BY POLAR</div>;
