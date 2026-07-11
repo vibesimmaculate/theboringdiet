@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
+import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as EvidenceRouteImport } from './routes/evidence'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WhatsInsideRoute = WhatsInsideRouteImport.update({
   id: '/whats-inside',
   path: '/whats-inside',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductRoute = ProductRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/evidence': typeof EvidenceRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/evidence': typeof EvidenceRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRoutesById {
@@ -61,19 +69,33 @@ export interface FileRoutesById {
   '/evidence': typeof EvidenceRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/evidence' | '/how-it-works' | '/product' | '/whats-inside'
+  fullPaths:
+    | '/'
+    | '/evidence'
+    | '/how-it-works'
+    | '/product'
+    | '/safety'
+    | '/whats-inside'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/evidence' | '/how-it-works' | '/product' | '/whats-inside'
+  to:
+    | '/'
+    | '/evidence'
+    | '/how-it-works'
+    | '/product'
+    | '/safety'
+    | '/whats-inside'
   id:
     | '__root__'
     | '/'
     | '/evidence'
     | '/how-it-works'
     | '/product'
+    | '/safety'
     | '/whats-inside'
   fileRoutesById: FileRoutesById
 }
@@ -82,6 +104,7 @@ export interface RootRouteChildren {
   EvidenceRoute: typeof EvidenceRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ProductRoute: typeof ProductRoute
+  SafetyRoute: typeof SafetyRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
 }
 
@@ -92,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/whats-inside'
       fullPath: '/whats-inside'
       preLoaderRoute: typeof WhatsInsideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product': {
@@ -130,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceRoute: EvidenceRoute,
   HowItWorksRoute: HowItWorksRoute,
   ProductRoute: ProductRoute,
+  SafetyRoute: SafetyRoute,
   WhatsInsideRoute: WhatsInsideRoute,
 }
 export const routeTree = rootRouteImport
