@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useRouterState, Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
+
 
 const HIDE_ROUTES = ["/success", "/payment-cancelled", "/safety", "/privacy", "/terms", "/refunds", "/disclaimer", "/contact"];
 
