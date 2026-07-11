@@ -11,11 +11,12 @@
  */
 
 @theme inline {
-  --radius-sm: 0px;
-  --radius-md: 2px;
-  --radius-lg: 4px;
-  --radius-xl: 4px;
-  --radius-2xl: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 22px;
+
 
   --color-bone: var(--bone);
   --color-paper: var(--paper);
@@ -49,30 +50,28 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-display: "Instrument Sans", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Newsreader", "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 :root {
-  /* Brand palette — eggshell, egg yolk, potato */
-  --bone: #f7ecc9;         /* eggshell, warmer */
-  --paper: #fdf6dc;        /* pale eggshell */
-  --surface: #f0e0a8;      /* creamy yolk */
-  --charcoal: #2a1a0a;     /* roasted brown-black */
-  --charcoal-soft: #4a331d;
-  --stone: #d9b878;        /* golden potato */
-  --stone-dark: #7a4a1e;   /* potato skin */
-  --gold: #f5b800;         /* vivid egg yolk */
-  --gold-light: #ffd766;   /* soft yolk */
-  --red: #c0392b;          /* baked sienna */
-  --deep: #1a0e04;         /* deep roast */
-
-
+  /* Premium modern palette — warm minimal, single amber accent */
+  --bone: #fbfaf7;         /* warm near-white */
+  --paper: #ffffff;        /* pure paper */
+  --surface: #f1eee7;      /* muted cream */
+  --charcoal: #0b0b0c;     /* near-black */
+  --charcoal-soft: #2a2926;
+  --stone: #e4e0d6;        /* subtle border */
+  --stone-dark: #6b6862;   /* muted foreground */
+  --gold: #b8873a;         /* refined amber accent */
+  --gold-light: #f0e4c4;   /* soft cream */
+  --red: #a8321f;
+  --deep: #0a0a0b;
 
   /* shadcn semantic map */
-  --radius: 2px;
+  --radius: 10px;
   --background: var(--bone);
   --foreground: var(--charcoal);
   --card: var(--paper);
@@ -93,6 +92,7 @@
   --input: var(--stone);
   --ring: var(--gold);
 }
+
 
 .dark {
   --background: var(--deep);
@@ -263,18 +263,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 18px 26px;
+  gap: 10px;
+  padding: 16px 28px;
   min-height: 52px;
   background: var(--charcoal);
   color: var(--bone);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transition: background 200ms cubic-bezier(0.22, 1, 0.36, 1);
-  &:hover:not(:disabled) { background: var(--charcoal-soft); }
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 8px 24px -12px rgba(0,0,0,0.25);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background 180ms;
+  &:hover:not(:disabled) { background: var(--charcoal-soft); transform: translateY(-1px); }
   &:disabled { opacity: 0.55; cursor: not-allowed; }
 }
 @utility btn-invert {
@@ -286,19 +287,19 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 22px;
+  padding: 14px 24px;
   min-height: 48px;
   border: 1px solid var(--charcoal);
   color: var(--charcoal);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 999px;
   background: transparent;
-  transition: background 180ms ease;
+  transition: background 180ms ease, color 180ms ease;
   &:hover { background: var(--charcoal); color: var(--bone); }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   * {
