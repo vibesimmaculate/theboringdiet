@@ -1,74 +1,62 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
-  useRouter,
   HeadContent,
   Scripts,
+  useRouter,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BRAND } from "@/config/brand";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { AnnouncementBar } from "@/components/layout/announcement-bar";
+import { StickyPurchaseDock } from "@/components/layout/sticky-purchase-dock";
+import { CookieBanner } from "@/components/layout/cookie-banner";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
+import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <main className="min-h-screen bg-bone paper-grain">
+      <div className="editorial-main pt-40 pb-32">
+        <div className="folio mb-6">THE BORING DIET · 404</div>
+        <h1 className="h-section">
+          NOT FOUND<span className="text-gold">.</span>
+        </h1>
+        <p className="mt-6 max-w-md text-stone-dark">
+          The page you're looking for is not part of this publication.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+        <a href="/" className="btn-outline mt-10">Return to the cover</a>
       </div>
-    </div>
+    </main>
   );
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+    <main className="min-h-screen bg-bone paper-grain">
+      <div className="editorial-main pt-40 pb-32">
+        <div className="folio mb-6">THE BORING DIET · ERROR</div>
+        <h1 className="h-chapter">This page didn't load<span className="text-gold">.</span></h1>
+        <p className="mt-6 max-w-md text-stone-dark">
+          Something went wrong on our end. You can try again or return home.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-10 flex gap-3">
           <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
+            onClick={() => { router.invalidate(); reset(); }}
+            className="btn-primary"
+          >Try again</button>
+          <a href="/" className="btn-outline">Go home</a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -77,21 +65,56 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: `${BRAND.name} — A bounded 14-day eating experiment` },
+      {
+        name: "description",
+        content:
+          "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time. No subscription. Instant digital access through Polar.",
+      },
+      { name: "author", content: BRAND.name },
+      { name: "theme-color", content: "#F5F3ED" },
+      { property: "og:site_name", content: BRAND.name },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: `${BRAND.name} — A bounded 14-day eating experiment` },
+      {
+        property: "og:description",
+        content:
+          "A structured 14-day eating experiment. Digital PDF. $19 one-time. No subscription.",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "format-detection", content: "telephone=no" },
+      { name: "robots", content: "index,follow,max-image-preview:large" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: BRAND.name,
+          description: BRAND.shortDescription,
+          url: "/",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: BRAND.name,
+          url: "/",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -107,6 +130,9 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-charcoal focus:text-bone focus:px-4 focus:py-2">
+          Skip to content
+        </a>
         {children}
         <Scripts />
       </body>
@@ -116,11 +142,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <MetaPixel />
+      <AnnouncementBar />
+      <SiteHeader />
+      <main id="main">
+        <Outlet />
+      </main>
+      <SiteFooter />
+      <StickyPurchaseDock />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }

@@ -1,0 +1,50 @@
+# The Boring Diet
+
+> A premium 36-page digital publication containing a bounded 14-day eating experiment.
+> One-time purchase. $19 USD. No subscription. Instant digital delivery through Polar.
+
+Note: llms.txt is an optional machine-readable reference and does not replace crawlable HTML, internal linking, structured data or standard SEO.
+
+## Facts
+
+- Brand: The Boring Diet
+- Product: The Boring Diet Digital Edition
+- Format: PDF
+- Length: 36 pages
+- Price: $19 USD
+- Billing: One-time
+- Subscription: None
+- Duration: 14 days
+- Delivery: Polar digital access
+- Account required: No
+- Target audience: Adults 18+ considering a short, structured personal experiment
+- Medical advice: No
+- Exit plan: Included
+- Safety boundaries: Included
+- Exact protocol public: No (the exact foods, quantities and daily schedule are inside the paid guide)
+
+## Canonical URLs
+
+- Home: /
+- Product: /product
+- The Idea: /how-it-works
+- What's Inside: /whats-inside
+- Evidence: /evidence
+- Safety: /safety
+- FAQ: /faq
+- Guides: /guides
+- About: /about
+- Press: /press
+- Contact: /contact
+- Privacy: /privacy
+- Terms: /terms
+- Refunds: /refunds
+- Disclaimer: /disclaimer
+
+## What the product is not
+
+- Not a subscription
+- Not an app
+- Not a medical treatment
+- Not personalized dietary advice
+- Not a guarantee of weight loss or any specific outcome

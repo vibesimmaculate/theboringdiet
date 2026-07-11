@@ -9,38 +9,401 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SuccessRouteImport } from './routes/success'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as RefundsRouteImport } from './routes/refunds'
+import { Route as ProductRouteImport } from './routes/product'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as PaymentCancelledRouteImport } from './routes/payment-cancelled'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as ApiPublicWebhooksPolarRouteImport } from './routes/api.public.webhooks.polar'
 
+const WhatsInsideRoute = WhatsInsideRouteImport.update({
+  id: '/whats-inside',
+  path: '/whats-inside',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundsRoute = RefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductRoute = ProductRouteImport.update({
+  id: '/product',
+  path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentCancelledRoute = PaymentCancelledRouteImport.update({
+  id: '/payment-cancelled',
+  path: '/payment-cancelled',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceRoute = EvidenceRouteImport.update({
+  id: '/evidence',
+  path: '/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisclaimerRoute = DisclaimerRouteImport.update({
+  id: '/disclaimer',
+  path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWebhooksPolarRoute = ApiPublicWebhooksPolarRouteImport.update({
+  id: '/api/public/webhooks/polar',
+  path: '/api/public/webhooks/polar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/disclaimer': typeof DisclaimerRoute
+  '/evidence': typeof EvidenceRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
+  '/safety': typeof SafetyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/disclaimer': typeof DisclaimerRoute
+  '/evidence': typeof EvidenceRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
+  '/safety': typeof SafetyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/guides': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/disclaimer': typeof DisclaimerRoute
+  '/evidence': typeof EvidenceRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/payment-cancelled': typeof PaymentCancelledRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
+  '/safety': typeof SafetyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/disclaimer'
+    | '/evidence'
+    | '/faq'
+    | '/how-it-works'
+    | '/payment-cancelled'
+    | '/press'
+    | '/privacy'
+    | '/product'
+    | '/refunds'
+    | '/safety'
+    | '/sitemap.xml'
+    | '/success'
+    | '/terms'
+    | '/whats-inside'
+    | '/guides/$slug'
+    | '/guides/'
+    | '/api/public/webhooks/polar'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/disclaimer'
+    | '/evidence'
+    | '/faq'
+    | '/how-it-works'
+    | '/payment-cancelled'
+    | '/press'
+    | '/privacy'
+    | '/product'
+    | '/refunds'
+    | '/safety'
+    | '/sitemap.xml'
+    | '/success'
+    | '/terms'
+    | '/whats-inside'
+    | '/guides/$slug'
+    | '/guides'
+    | '/api/public/webhooks/polar'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/disclaimer'
+    | '/evidence'
+    | '/faq'
+    | '/how-it-works'
+    | '/payment-cancelled'
+    | '/press'
+    | '/privacy'
+    | '/product'
+    | '/refunds'
+    | '/safety'
+    | '/sitemap.xml'
+    | '/success'
+    | '/terms'
+    | '/whats-inside'
+    | '/guides/$slug'
+    | '/guides/'
+    | '/api/public/webhooks/polar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DisclaimerRoute: typeof DisclaimerRoute
+  EvidenceRoute: typeof EvidenceRoute
+  FaqRoute: typeof FaqRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  PaymentCancelledRoute: typeof PaymentCancelledRoute
+  PressRoute: typeof PressRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProductRoute: typeof ProductRoute
+  RefundsRoute: typeof RefundsRoute
+  SafetyRoute: typeof SafetyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SuccessRoute: typeof SuccessRoute
+  TermsRoute: typeof TermsRoute
+  WhatsInsideRoute: typeof WhatsInsideRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
+  ApiPublicWebhooksPolarRoute: typeof ApiPublicWebhooksPolarRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/whats-inside': {
+      id: '/whats-inside'
+      path: '/whats-inside'
+      fullPath: '/whats-inside'
+      preLoaderRoute: typeof WhatsInsideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refunds': {
+      id: '/refunds'
+      path: '/refunds'
+      fullPath: '/refunds'
+      preLoaderRoute: typeof RefundsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product': {
+      id: '/product'
+      path: '/product'
+      fullPath: '/product'
+      preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-cancelled': {
+      id: '/payment-cancelled'
+      path: '/payment-cancelled'
+      fullPath: '/payment-cancelled'
+      preLoaderRoute: typeof PaymentCancelledRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence': {
+      id: '/evidence'
+      path: '/evidence'
+      fullPath: '/evidence'
+      preLoaderRoute: typeof EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disclaimer': {
+      id: '/disclaimer'
+      path: '/disclaimer'
+      fullPath: '/disclaimer'
+      preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +411,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/webhooks/polar': {
+      id: '/api/public/webhooks/polar'
+      path: '/api/public/webhooks/polar'
+      fullPath: '/api/public/webhooks/polar'
+      preLoaderRoute: typeof ApiPublicWebhooksPolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DisclaimerRoute: DisclaimerRoute,
+  EvidenceRoute: EvidenceRoute,
+  FaqRoute: FaqRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  PaymentCancelledRoute: PaymentCancelledRoute,
+  PressRoute: PressRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProductRoute: ProductRoute,
+  RefundsRoute: RefundsRoute,
+  SafetyRoute: SafetyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SuccessRoute: SuccessRoute,
+  TermsRoute: TermsRoute,
+  WhatsInsideRoute: WhatsInsideRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
+  ApiPublicWebhooksPolarRoute: ApiPublicWebhooksPolarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
