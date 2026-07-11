@@ -65,12 +65,9 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <QuickFacts />
       <WhatsInsideArchive />
-      <EvidenceSection />
       <PricingSection />
       <HomeFaqSection />
-      <BackCover />
     </>
   );
 }
