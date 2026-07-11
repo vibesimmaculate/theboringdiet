@@ -26,7 +26,7 @@ export function PricingSection() {
   }, []);
 
   return (
-    <section ref={ref} id="pricing" className="bg-deep py-16 sm:py-24 md:py-32">
+    <section ref={ref} id="pricing" className="bg-deep py-14 sm:py-20">
       <div className="editorial-shell">
         <div className="mx-auto max-w-4xl bg-bone paper-grain">
           <div className="p-6 sm:p-12 md:p-16">
