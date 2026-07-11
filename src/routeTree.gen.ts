@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as PressRouteImport } from './routes/press'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EvidenceRouteImport } from './routes/evidence'
@@ -31,6 +32,11 @@ const SafetyRoute = SafetyRouteImport.update({
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/press': typeof PressRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/press': typeof PressRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/evidence': typeof EvidenceRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/press': typeof PressRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/press'
     | '/product'
     | '/safety'
     | '/whats-inside'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/press'
     | '/product'
     | '/safety'
     | '/whats-inside'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/evidence'
     | '/faq'
     | '/how-it-works'
+    | '/press'
     | '/product'
     | '/safety'
     | '/whats-inside'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   EvidenceRoute: typeof EvidenceRoute
   FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  PressRoute: typeof PressRoute
   ProductRoute: typeof ProductRoute
   SafetyRoute: typeof SafetyRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/product'
       fullPath: '/product'
       preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceRoute: EvidenceRoute,
   FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
+  PressRoute: PressRoute,
   ProductRoute: ProductRoute,
   SafetyRoute: SafetyRoute,
   WhatsInsideRoute: WhatsInsideRoute,
