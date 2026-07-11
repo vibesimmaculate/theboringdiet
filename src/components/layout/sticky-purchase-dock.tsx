@@ -38,9 +38,14 @@ export function StickyPurchaseDock() {
                 <span className="text-gold">$19</span> · ONE TIME
               </div>
             </div>
-            <Link to="/product" data-analytics="sticky_cta_click" className="mono-label bg-bone text-charcoal px-4 py-2.5 hover:bg-gold-light transition-colors">
+            <PolarCheckoutTrigger
+              compact
+              analyticsId="sticky_cta_click"
+              className="!min-h-[40px] !py-2.5 !px-4 !bg-bone !text-charcoal hover:!bg-gold-light"
+            >
               GET IT
-            </Link>
+            </PolarCheckoutTrigger>
+
           </motion.div>
 
           {/* Mobile bottom bar */}
