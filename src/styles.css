@@ -11,11 +11,12 @@
  */
 
 @theme inline {
-  --radius-sm: 0px;
-  --radius-md: 2px;
-  --radius-lg: 4px;
-  --radius-xl: 4px;
-  --radius-2xl: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 22px;
+
 
   --color-bone: var(--bone);
   --color-paper: var(--paper);
