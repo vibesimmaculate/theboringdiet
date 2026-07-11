@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WhatsInsideRoute = WhatsInsideRouteImport.update({
+  id: '/whats-inside',
+  path: '/whats-inside',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/how-it-works': typeof HowItWorksRoute
   '/product': typeof ProductRoute
+  '/whats-inside': typeof WhatsInsideRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-works' | '/product'
+  fullPaths: '/' | '/how-it-works' | '/product' | '/whats-inside'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-works' | '/product'
-  id: '__root__' | '/' | '/how-it-works' | '/product'
+  to: '/' | '/how-it-works' | '/product' | '/whats-inside'
+  id: '__root__' | '/' | '/how-it-works' | '/product' | '/whats-inside'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ProductRoute: typeof ProductRoute
+  WhatsInsideRoute: typeof WhatsInsideRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/whats-inside': {
+      id: '/whats-inside'
+      path: '/whats-inside'
+      fullPath: '/whats-inside'
+      preLoaderRoute: typeof WhatsInsideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product': {
       id: '/product'
       path: '/product'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HowItWorksRoute: HowItWorksRoute,
   ProductRoute: ProductRoute,
+  WhatsInsideRoute: WhatsInsideRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
