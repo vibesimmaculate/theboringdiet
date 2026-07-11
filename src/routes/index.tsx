@@ -47,8 +47,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "The Boring Diet — A bounded 14-day eating experiment · $19" },
       { name: "description", content: "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time. No subscription. Instant digital access through Polar." },
-      { property: "og:title", content: "The Boring Diet — A bounded 14-day eating experiment" },
-      { property: "og:description", content: "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time." },
+      { property: "og:title", content: "The Boring Diet — A bounded 14-day eating experiment · $19" },
+      { property: "og:description", content: "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time. No subscription. Instant digital access through Polar." },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
     ],

@@ -79,15 +79,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "A structured 14-day eating experiment. Digital PDF. $19 one-time. No subscription.",
+          "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time. No subscription. Instant digital access through Polar.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "format-detection", content: "telephone=no" },
       { name: "robots", content: "index,follow,max-image-preview:large" },
+      { title: "The Boring Diet — A bounded 14-day eating experiment · $19" },
+      { property: "og:title", content: "The Boring Diet — A bounded 14-day eating experiment · $19" },
+      { name: "twitter:title", content: "The Boring Diet — A bounded 14-day eating experiment · $19" },
+      { name: "twitter:description", content: "A premium 36-page digital publication. One protocol. Fourteen days. $19 one-time. No subscription. Instant digital access through Polar." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6293384b-cecb-46e8-80b3-a5dea707620d" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6293384b-cecb-46e8-80b3-a5dea707620d" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
