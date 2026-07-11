@@ -30,7 +30,7 @@ export function PolarCheckoutTrigger({
   const btnRef = useRef<HTMLButtonElement>(null);
 
   const onClick = async () => {
-    if (!approved || loading) return;
+    if (loading) return;
     setLoading(true);
     if (analyticsId) trackEvent(analyticsId);
     try {
@@ -54,16 +54,14 @@ export function PolarCheckoutTrigger({
     }
   };
 
-  const disabled = approved !== true || loading;
-  const label =
-    approved === false ? "PAYMENT ACCESS IS BEING FINALIZED" : children || "GET INSTANT ACCESS — $19";
+  const label = children || "GET INSTANT ACCESS — $19";
 
   return (
     <div className={cn("inline-flex flex-col items-start", className)}>
       <button
         ref={btnRef}
         onClick={onClick}
-        disabled={disabled}
+        disabled={loading}
         aria-busy={loading}
         data-analytics={analyticsId}
         className={cn(size === "primary" ? "btn-primary" : "btn-outline", "w-full sm:w-auto")}
@@ -77,18 +75,10 @@ export function PolarCheckoutTrigger({
           label
         )}
       </button>
-      <div className="mt-2 mono-label text-stone-dark">
-        {approved === false ? (
-          <>Purchasing will become available once payment access is finalized.</>
-        ) : (
-          <>$19 USD · ONE TIME · DIGITAL DELIVERY</>
-        )}
+      <div className="mt-2 mono-label text-stone-dark">$19 USD · ONE TIME · DIGITAL DELIVERY</div>
+      <div className="mono-label text-stone-dark text-[10px]">
+        No subscription · No account required
       </div>
-      {approved !== false && (
-        <div className="mono-label text-stone-dark text-[10px]">
-          No subscription · No account required
-        </div>
-      )}
     </div>
   );
 }
