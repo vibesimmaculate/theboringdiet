@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useRouterState, Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
+
 
 const HIDE_ROUTES = ["/success", "/payment-cancelled", "/safety", "/privacy", "/terms", "/refunds", "/disclaimer", "/contact"];
 
@@ -36,9 +38,14 @@ export function StickyPurchaseDock() {
                 <span className="text-gold">$19</span> · ONE TIME
               </div>
             </div>
-            <Link to="/product" data-analytics="sticky_cta_click" className="mono-label bg-bone text-charcoal px-4 py-2.5 hover:bg-gold-light transition-colors">
+            <PolarCheckoutTrigger
+              compact
+              analyticsId="sticky_cta_click"
+              className="!min-h-[40px] !py-2.5 !px-4 !bg-bone !text-charcoal hover:!bg-gold-light"
+            >
               GET IT
-            </Link>
+            </PolarCheckoutTrigger>
+
           </motion.div>
 
           {/* Mobile bottom bar */}
@@ -55,11 +62,12 @@ export function StickyPurchaseDock() {
                 <span className="text-gold">$19</span>
               </div>
             </div>
-            <Link
-              to="/product"
-              data-analytics="sticky_cta_click"
-              className="mono-label bg-bone text-charcoal px-5 py-3 min-h-[48px] flex items-center"
-            >GET IT</Link>
+            <PolarCheckoutTrigger
+              compact
+              analyticsId="sticky_cta_click"
+              className="!bg-bone !text-charcoal !px-5 !py-3 !min-h-[48px]"
+            >GET IT</PolarCheckoutTrigger>
+
           </motion.div>
         </>
       )}
