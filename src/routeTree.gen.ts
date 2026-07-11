@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as RefundsRouteImport } from './routes/refunds'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
@@ -37,6 +38,11 @@ const TermsRoute = TermsRouteImport.update({
 const SafetyRoute = SafetyRouteImport.update({
   id: '/safety',
   path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundsRoute = RefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductRoute = ProductRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
+  '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/press'
     | '/privacy'
     | '/product'
+    | '/refunds'
     | '/safety'
     | '/terms'
     | '/whats-inside'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/press'
     | '/privacy'
     | '/product'
+    | '/refunds'
     | '/safety'
     | '/terms'
     | '/whats-inside'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/press'
     | '/privacy'
     | '/product'
+    | '/refunds'
     | '/safety'
     | '/terms'
     | '/whats-inside'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
+  RefundsRoute: typeof RefundsRoute
   SafetyRoute: typeof SafetyRoute
   TermsRoute: typeof TermsRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/safety'
       fullPath: '/safety'
       preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refunds': {
+      id: '/refunds'
+      path: '/refunds'
+      fullPath: '/refunds'
+      preLoaderRoute: typeof RefundsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product': {
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
+  RefundsRoute: RefundsRoute,
   SafetyRoute: SafetyRoute,
   TermsRoute: TermsRoute,
   WhatsInsideRoute: WhatsInsideRoute,
