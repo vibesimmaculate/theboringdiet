@@ -12,7 +12,8 @@ import appCss from "../styles.css?url";
 import { BRAND } from "@/config/brand";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { AnnouncementBar } from "@/components/layout/announcement-bar";
+import { OfferBar } from "@/components/marketing/offer-bar";
+import { OfferPopup } from "@/components/marketing/offer-popup";
 import { StickyPurchaseDock } from "@/components/layout/sticky-purchase-dock";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { MetaPixel } from "@/components/analytics/meta-pixel";
@@ -152,13 +153,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <MetaPixel />
-      <AnnouncementBar />
+      <OfferBar />
       <SiteHeader />
       <main id="main">
         <Outlet />
       </main>
       <SiteFooter />
       <StickyPurchaseDock />
+      <OfferPopup />
       <CookieBanner />
     </QueryClientProvider>
   );
