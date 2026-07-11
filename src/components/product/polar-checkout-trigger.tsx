@@ -28,12 +28,12 @@ export function PolarCheckoutTrigger({
   analyticsId?: string;
   size?: "primary" | "outline";
 }) {
-  const [approved, setApproved] = useState<boolean | null>(null);
+  const [approved, setApproved] = useState<boolean | null>(true);
   const [loading, setLoading] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    getPolarApprovedStatus()
+    if (false) getPolarApprovedStatus()
       .then((r) => setApproved(r.approved))
       .catch(() => setApproved(false));
   }, []);
