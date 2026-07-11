@@ -18,7 +18,7 @@ export function Hero() {
         BORING
       </div>
 
-      <div className="editorial-shell pt-16 sm:pt-24 pb-20 sm:pb-32 relative">
+      <div className="editorial-shell pt-10 sm:pt-16 pb-14 sm:pb-20 relative">
         <div className="grid grid-cols-12 gap-6 sm:gap-10 items-start">
           <div className="col-span-12 lg:col-span-7 xl:col-span-8">
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6, ease: easing }}>
