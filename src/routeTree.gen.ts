@@ -20,6 +20,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 
 const WhatsInsideRoute = WhatsInsideRouteImport.update({
   id: '/whats-inside',
@@ -76,6 +77,11 @@ const GuidesIndexRoute = GuidesIndexRouteImport.update({
   path: '/guides/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides/$slug'
     | '/guides/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides/$slug'
     | '/guides'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides/$slug'
     | '/guides/'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   ProductRoute: typeof ProductRoute
   SafetyRoute: typeof SafetyRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductRoute: ProductRoute,
   SafetyRoute: SafetyRoute,
   WhatsInsideRoute: WhatsInsideRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
   GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -103,7 +103,7 @@ function GuidePage() {
         <p className="mt-6 font-serif italic text-2xl text-charcoal-soft max-w-2xl">{guide.excerpt}</p>
         <HorizontalRule className="mt-12" />
         <div className="mt-12 max-w-2xl space-y-6 text-lg leading-relaxed">
-          {guide.body.map((p, i) => <p key={i}>{p}</p>)}
+          {guide.body.map((p: string, i: number) => <p key={i}>{p}</p>)}
         </div>
 
         <div className="mt-16 border-t border-charcoal pt-10 max-w-2xl">
