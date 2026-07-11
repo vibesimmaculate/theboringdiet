@@ -66,6 +66,7 @@ function HomePage() {
     <>
       <Hero />
       <WhatsInsideArchive />
+      <EvidenceSection />
       <PricingSection />
       <HomeFaqSection />
     </>
