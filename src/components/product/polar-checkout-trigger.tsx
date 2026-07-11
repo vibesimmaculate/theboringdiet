@@ -56,7 +56,11 @@ export function PolarCheckoutTrigger({
     }
   };
 
-  const label = children || "GET INSTANT ACCESS — $19";
+  const label = children || (
+    <>
+      GET INSTANT ACCESS · <span className="line-through opacity-60 mr-1">$50</span> <span className="text-gold">$19</span>
+    </>
+  );
 
   const button = (
     <button
@@ -83,13 +87,16 @@ export function PolarCheckoutTrigger({
   return (
     <div className="inline-flex flex-col items-start">
       {button}
-      <div className="mt-2 mono-label text-stone-dark">$19 USD · ONE TIME · DIGITAL DELIVERY</div>
-      <div className="mono-label text-stone-dark text-[10px]">
-        No subscription · No account required
+      <div className="mt-3 mono-label text-stone-dark">
+        LAUNCH OFFER · 62% OFF · ENDS SOON
+      </div>
+      <div className="mono-label text-stone-dark text-[10px] mt-1">
+        Instant delivery · No subscription · No account required
       </div>
     </div>
   );
 }
+
 
 
 export function CheckoutSecureLabel() {

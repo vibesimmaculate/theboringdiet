@@ -38,10 +38,18 @@ export function PricingSection() {
               THE COMPLETE<br />14-DAY PROTOCOL<span className="text-gold">.</span>
             </h2>
 
-            <div className="mt-12 grid grid-cols-12 gap-8 items-end border-y border-charcoal py-8">
+            <div className="mt-10 inline-flex items-center gap-2 bg-gold-light text-charcoal px-3 py-1.5 rounded-full mono-label text-[10px]">
+              ● LAUNCH OFFER · 62% OFF · ENDS SOON
+            </div>
+
+            <div className="mt-6 grid grid-cols-12 gap-8 items-end border-y border-charcoal py-8">
               <div className="col-span-12 sm:col-span-6">
-                <div className="mono-label text-stone-dark">PRICE</div>
-                <div className="numeric-huge mt-2">$19</div>
+                <div className="mono-label text-stone-dark">TODAY'S PRICE</div>
+                <div className="mt-2 flex items-baseline gap-4">
+                  <span className="numeric-huge">$19</span>
+                  <span className="font-display text-3xl line-through text-stone-dark">$50</span>
+                </div>
+                <div className="mt-2 mono-label text-gold">YOU SAVE $31</div>
               </div>
               <div className="col-span-12 sm:col-span-6">
                 <div className="mono-label text-stone-dark">CURRENCY · BILLING</div>
@@ -49,6 +57,7 @@ export function PricingSection() {
                 <div className="mt-2 text-stone-dark text-sm">No subscription. Nothing renews.</div>
               </div>
             </div>
+
 
             <div className="mt-10">
               <div className="mono-label text-stone-dark">WHAT'S INCLUDED</div>
