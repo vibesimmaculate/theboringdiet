@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { getPolarApprovedStatus } from "@/lib/polar-status.functions";
+import { useRef, useState, type ReactNode } from "react";
 import { POLAR_CHECKOUT_LINK } from "@/config/brand";
 import { cn } from "@/lib/utils";
 import { trackEvent, trackFbStandard } from "@/components/analytics/meta-pixel";
@@ -13,9 +12,8 @@ type PolarEmbed = {
 };
 
 /**
- * A universal Polar checkout trigger.
- * - When POLAR_APPROVED=false: disables and shows the required copy.
- * - When true: opens embedded checkout over the current page via PolarEmbedCheckout.create()
+ * A universal Polar checkout trigger — opens the embedded Polar checkout
+ * for the $19 product using the compile-time checkout link.
  */
 export function PolarCheckoutTrigger({
   className,
@@ -28,18 +26,11 @@ export function PolarCheckoutTrigger({
   analyticsId?: string;
   size?: "primary" | "outline";
 }) {
-  const [approved, setApproved] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    getPolarApprovedStatus()
-      .then((r) => setApproved(r.approved))
-      .catch(() => setApproved(false));
-  }, []);
-
   const onClick = async () => {
-    if (!approved || loading) return;
+    if (loading) return;
     setLoading(true);
     if (analyticsId) trackEvent(analyticsId);
     try {
@@ -63,16 +54,14 @@ export function PolarCheckoutTrigger({
     }
   };
 
-  const disabled = approved !== true || loading;
-  const label =
-    approved === false ? "PAYMENT ACCESS IS BEING FINALIZED" : children || "GET INSTANT ACCESS — $19";
+  const label = children || "GET INSTANT ACCESS — $19";
 
   return (
     <div className={cn("inline-flex flex-col items-start", className)}>
       <button
         ref={btnRef}
         onClick={onClick}
-        disabled={disabled}
+        disabled={loading}
         aria-busy={loading}
         data-analytics={analyticsId}
         className={cn(size === "primary" ? "btn-primary" : "btn-outline", "w-full sm:w-auto")}
@@ -86,18 +75,10 @@ export function PolarCheckoutTrigger({
           label
         )}
       </button>
-      <div className="mt-2 mono-label text-stone-dark">
-        {approved === false ? (
-          <>Purchasing will become available once payment access is finalized.</>
-        ) : (
-          <>$19 USD · ONE TIME · DIGITAL DELIVERY</>
-        )}
+      <div className="mt-2 mono-label text-stone-dark">$19 USD · ONE TIME · DIGITAL DELIVERY</div>
+      <div className="mono-label text-stone-dark text-[10px]">
+        No subscription · No account required
       </div>
-      {approved !== false && (
-        <div className="mono-label text-stone-dark text-[10px]">
-          No subscription · No account required
-        </div>
-      )}
     </div>
   );
 }
