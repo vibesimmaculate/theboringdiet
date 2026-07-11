@@ -27,6 +27,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as ApiPublicWebhooksPolarRouteImport } from './routes/api.public.webhooks.polar'
 
 const WhatsInsideRoute = WhatsInsideRouteImport.update({
   id: '/whats-inside',
@@ -118,6 +119,11 @@ const GuidesSlugRoute = GuidesSlugRouteImport.update({
   path: '/guides/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWebhooksPolarRoute = ApiPublicWebhooksPolarRouteImport.update({
+  id: '/api/public/webhooks/polar',
+  path: '/api/public/webhooks/polar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
+  '/api/public/webhooks/polar': typeof ApiPublicWebhooksPolarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides/'
+    | '/api/public/webhooks/polar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides'
+    | '/api/public/webhooks/polar'
   id:
     | '__root__'
     | '/'
@@ -241,6 +252,7 @@ export interface FileRouteTypes {
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides/'
+    | '/api/public/webhooks/polar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   WhatsInsideRoute: typeof WhatsInsideRoute
   GuidesSlugRoute: typeof GuidesSlugRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
+  ApiPublicWebhooksPolarRoute: typeof ApiPublicWebhooksPolarRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -392,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/webhooks/polar': {
+      id: '/api/public/webhooks/polar'
+      path: '/api/public/webhooks/polar'
+      fullPath: '/api/public/webhooks/polar'
+      preLoaderRoute: typeof ApiPublicWebhooksPolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -414,6 +434,7 @@ const rootRouteChildren: RootRouteChildren = {
   WhatsInsideRoute: WhatsInsideRoute,
   GuidesSlugRoute: GuidesSlugRoute,
   GuidesIndexRoute: GuidesIndexRoute,
+  ApiPublicWebhooksPolarRoute: ApiPublicWebhooksPolarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
