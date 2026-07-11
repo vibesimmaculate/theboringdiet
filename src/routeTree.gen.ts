@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -26,6 +27,11 @@ import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 const WhatsInsideRoute = WhatsInsideRouteImport.update({
   id: '/whats-inside',
   path: '/whats-inside',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SafetyRoute = SafetyRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides': typeof GuidesIndexRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/guides/': typeof GuidesIndexRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/safety'
+    | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides/'
@@ -163,6 +173,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/safety'
+    | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/safety'
+    | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
     | '/guides/'
@@ -194,6 +206,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
   SafetyRoute: typeof SafetyRoute
+  TermsRoute: typeof TermsRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
   GuidesSlugRoute: typeof GuidesSlugRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/whats-inside'
       fullPath: '/whats-inside'
       preLoaderRoute: typeof WhatsInsideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/safety': {
@@ -306,6 +326,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
   SafetyRoute: SafetyRoute,
+  TermsRoute: TermsRoute,
   WhatsInsideRoute: WhatsInsideRoute,
   GuidesSlugRoute: GuidesSlugRoute,
   GuidesIndexRoute: GuidesIndexRoute,
