@@ -9,7 +9,7 @@ export const GUIDES = [
   { slug: "how-to-decide-whether-a-diet-challenge-is-appropriate", title: "How to decide whether a diet challenge is appropriate", excerpt: "A calm framework — including when the honest answer is no." },
 ] as const;
 
-export const Route = createFileRoute("/guides")({
+export const Route = createFileRoute("/guides/")({
   head: () => ({
     meta: [
       { title: "Guides — The Boring Diet Editorial Hub" },

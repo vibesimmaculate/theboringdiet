@@ -19,6 +19,7 @@ import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 
 const WhatsInsideRoute = WhatsInsideRouteImport.update({
   id: '/whats-inside',
@@ -70,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/product': typeof ProductRoute
   '/safety': typeof SafetyRoute
   '/whats-inside': typeof WhatsInsideRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/safety'
     | '/whats-inside'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   ProductRoute: typeof ProductRoute
   SafetyRoute: typeof SafetyRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductRoute: ProductRoute,
   SafetyRoute: SafetyRoute,
   WhatsInsideRoute: WhatsInsideRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
