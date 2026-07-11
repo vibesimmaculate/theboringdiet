@@ -65,16 +65,9 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <ContrarianChapter />
       <QuickFacts />
-      <CoreMechanism />
-      <EvidenceSection />
-      <EvidenceBoundary />
       <WhatsInsideArchive />
-      <TimelineSection />
-      <HowItWorksSection />
-      <SafetySpread />
-      <Manifesto />
+      <EvidenceSection />
       <PricingSection />
       <HomeFaqSection />
       <BackCover />
