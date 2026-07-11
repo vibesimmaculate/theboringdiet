@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhatsInsideRouteImport } from './routes/whats-inside'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SuccessRouteImport } from './routes/success'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as RefundsRouteImport } from './routes/refunds'
 import { Route as ProductRouteImport } from './routes/product'
@@ -34,6 +35,11 @@ const WhatsInsideRoute = WhatsInsideRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SafetyRoute = SafetyRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/product': typeof ProductRoute
   '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
+  '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/product': typeof ProductRoute
   '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
+  '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/product': typeof ProductRoute
   '/refunds': typeof RefundsRoute
   '/safety': typeof SafetyRoute
+  '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
   '/whats-inside': typeof WhatsInsideRoute
   '/guides/$slug': typeof GuidesSlugRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/refunds'
     | '/safety'
+    | '/success'
     | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/refunds'
     | '/safety'
+    | '/success'
     | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/product'
     | '/refunds'
     | '/safety'
+    | '/success'
     | '/terms'
     | '/whats-inside'
     | '/guides/$slug'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   ProductRoute: typeof ProductRoute
   RefundsRoute: typeof RefundsRoute
   SafetyRoute: typeof SafetyRoute
+  SuccessRoute: typeof SuccessRoute
   TermsRoute: typeof TermsRoute
   WhatsInsideRoute: typeof WhatsInsideRoute
   GuidesSlugRoute: typeof GuidesSlugRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/safety': {
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductRoute: ProductRoute,
   RefundsRoute: RefundsRoute,
   SafetyRoute: SafetyRoute,
+  SuccessRoute: SuccessRoute,
   TermsRoute: TermsRoute,
   WhatsInsideRoute: WhatsInsideRoute,
   GuidesSlugRoute: GuidesSlugRoute,
