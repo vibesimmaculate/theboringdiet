@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { getPolarApprovedStatus } from "@/lib/polar-status.functions";
+import { useRef, useState, type ReactNode } from "react";
 import { POLAR_CHECKOUT_LINK } from "@/config/brand";
 import { cn } from "@/lib/utils";
 import { trackEvent, trackFbStandard } from "@/components/analytics/meta-pixel";
@@ -13,9 +12,8 @@ type PolarEmbed = {
 };
 
 /**
- * A universal Polar checkout trigger.
- * - When POLAR_APPROVED=false: disables and shows the required copy.
- * - When true: opens embedded checkout over the current page via PolarEmbedCheckout.create()
+ * A universal Polar checkout trigger — opens the embedded Polar checkout
+ * for the $19 product using the compile-time checkout link.
  */
 export function PolarCheckoutTrigger({
   className,
@@ -28,15 +26,8 @@ export function PolarCheckoutTrigger({
   analyticsId?: string;
   size?: "primary" | "outline";
 }) {
-  const [approved, setApproved] = useState<boolean | null>(true);
   const [loading, setLoading] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (false) getPolarApprovedStatus()
-      .then((r) => setApproved(r.approved))
-      .catch(() => setApproved(false));
-  }, []);
 
   const onClick = async () => {
     if (!approved || loading) return;
