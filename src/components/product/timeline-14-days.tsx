@@ -17,7 +17,7 @@ export function Timeline14Days() {
       <div className="hidden md:block">
         <div className="relative">
           <div className="absolute left-0 right-0 top-6 h-px bg-charcoal" />
-          <ol className="grid grid-cols-14 gap-1 relative">
+          <ol className="grid gap-1 relative" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
             {Array.from({ length: 14 }).map((_, i) => {
               const day = i + 1;
               const meta = DAYS[day];
