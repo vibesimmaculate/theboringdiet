@@ -48,15 +48,20 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <Link to="/product" className="btn-primary" data-analytics="header_cta_click">
+          <PolarCheckoutTrigger compact analyticsId="header_cta_click">
             GET THE PROTOCOL — $19
-          </Link>
+          </PolarCheckoutTrigger>
         </div>
 
         <div className="lg:hidden flex items-center gap-3">
-          <Link to="/product" className="btn-primary !min-h-[40px] !py-2 !px-3 text-[10px]" data-analytics="header_cta_click">
+          <PolarCheckoutTrigger
+            compact
+            analyticsId="header_cta_click"
+            className="!min-h-[40px] !py-2 !px-3 text-[10px]"
+          >
             $19
-          </Link>
+          </PolarCheckoutTrigger>
+
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
