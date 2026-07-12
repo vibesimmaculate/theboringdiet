@@ -39,7 +39,7 @@ export function PolarCheckoutTrigger({
       const mod = (await import("@polar-sh/checkout/embed")) as unknown as {
         PolarEmbedCheckout: PolarEmbed;
       };
-      const checkout = await mod.PolarEmbedCheckout.create(POLAR_CHECKOUT_LINK, "light");
+      const checkout = await mod.PolarEmbedCheckout.create(POLAR_CHECKOUT_LINK, "dark");
       trackEvent("polar_checkout_loaded");
       trackFbStandard("InitiateCheckout", { content_name: "The Boring Diet", currency: "USD", value: 19 });
       checkout.addEventListener("close", () => {
