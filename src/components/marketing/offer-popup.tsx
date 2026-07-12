@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
+import { POLAR_CHECKOUT_LINK } from "@/config/brand";
+import { trackEvent, trackFbStandard } from "@/components/analytics/meta-pixel";
 import { useOfferCountdown } from "@/hooks/use-offer-countdown";
 
 const DISMISS_KEY = "tbd_offer_popup_dismissed";
