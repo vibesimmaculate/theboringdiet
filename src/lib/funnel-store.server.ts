@@ -18,6 +18,7 @@ export type FunnelEvent = {
   tier: string;
   objection: string;
   score: number;
+  visitorId: string;
 };
 
 type FunnelStore = {

@@ -45,6 +45,7 @@ const eventSchema = z.object({
   tier: z.string().max(12).catch(""),
   objection: z.string().max(16).catch(""),
   score: z.number().min(0).max(100).catch(0),
+  visitorId: z.string().max(24).catch(""),
 });
 
 export const recordFunnelEvent = createServerFn({ method: "POST" })
