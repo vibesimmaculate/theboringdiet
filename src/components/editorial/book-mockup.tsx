@@ -1,16 +1,15 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import coverAsset from "@/assets/cover.png.asset.json";
 
-/**
- * A restrained CSS 3D editorial publication object.
- * No food imagery, no bright color.
- */
+/** A restrained CSS 3D editorial publication object. */
 export function BookMockup({ className, interactive = true }: { className?: string; interactive?: boolean }) {
   const reduced = useReducedMotion();
+  const [coverUnavailable, setCoverUnavailable] = useState(false);
+
   return (
     <div className={cn("relative select-none", className)} style={{ perspective: "1600px" }}>
-      {/* Redacted pages fanning behind */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {[0, 1, 2].map((i) => (
           <motion.div
@@ -21,7 +20,7 @@ export function BookMockup({ className, interactive = true }: { className?: stri
             className="absolute right-6 top-6 w-40 sm:w-52 h-56 sm:h-72 bg-paper border border-stone shadow-[0_4px_20px_rgba(17,17,17,0.06)] overflow-hidden"
           >
             <div className="p-3">
-              <div className="folio">THE BORING DIET · 00{i + 4}</div>
+              <div className="folio">THE BORING DIET &middot; 00{i + 4}</div>
               <div className="mt-3 h-1 w-8 bg-gold" />
               <div className="mt-4 space-y-1.5">
                 {Array.from({ length: 6 }).map((_, j) => (
@@ -38,7 +37,6 @@ export function BookMockup({ className, interactive = true }: { className?: stri
         ))}
       </div>
 
-      {/* Book */}
       <motion.div
         initial={{ opacity: 0, rotateY: -8, rotateX: 4, y: 20 }}
         animate={{ opacity: 1, rotateY: interactive && !reduced ? -2 : 0, rotateX: 0, y: 0 }}
@@ -47,25 +45,28 @@ export function BookMockup({ className, interactive = true }: { className?: stri
         className="relative mx-auto w-64 sm:w-80 md:w-96 aspect-[3/4] paper-grain"
         style={{ transformStyle: "preserve-3d", transformOrigin: "center" }}
       >
-        {/* Spine */}
-        <div
-          className="absolute top-0 bottom-0 -left-2 w-4 bg-charcoal"
-          style={{ transform: "rotateY(-40deg) translateZ(-6px)" }}
-        />
-        {/* Front cover — real edition artwork */}
-        <div
-          className="absolute inset-0 bg-charcoal border border-charcoal shadow-[0_30px_60px_-30px_rgba(17,17,17,0.55)] overflow-hidden"
-          style={{ transform: "translateZ(6px)" }}
-        >
-          <img
-            src={coverAsset.url}
-            alt="The Boring Diet — Edition 1.0 cover: I only ate potatoes and eggs for 14 days"
-            className="absolute inset-0 h-full w-full object-cover"
-            loading="eager"
-          />
-          
+        <div className="absolute top-0 bottom-0 -left-2 w-4 bg-charcoal" style={{ transform: "rotateY(-40deg) translateZ(-6px)" }} />
+        <div className="absolute inset-0 bg-charcoal border border-charcoal shadow-[0_30px_60px_-30px_rgba(17,17,17,0.55)] overflow-hidden" style={{ transform: "translateZ(6px)" }}>
+          {!coverUnavailable && (
+            <img
+              src={coverAsset.url}
+              alt="The Boring Diet edition 1.0 cover"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+              onError={() => setCoverUnavailable(true)}
+            />
+          )}
+          {coverUnavailable && (
+            <div className="absolute inset-0 flex flex-col justify-between p-7 sm:p-10 text-bone paper-grain">
+              <div className="mono-label text-bone/60">THE BORING DIET &middot; EDITION 1.0</div>
+              <div>
+                <div className="h-px w-12 bg-gold mb-5" />
+                <div className="font-display text-4xl sm:text-5xl font-bold leading-[0.85] tracking-[-0.05em]">THE<br />BORING<br />DIET<span className="text-gold">.</span></div>
+              </div>
+              <div className="mono-label text-bone/60">DIGITAL EDITION &middot; 36 PAGES</div>
+            </div>
+          )}
         </div>
-        {/* Page block edge */}
         <div className="absolute inset-y-2 -right-1.5 w-1.5 bg-stone" aria-hidden="true" />
       </motion.div>
     </div>
