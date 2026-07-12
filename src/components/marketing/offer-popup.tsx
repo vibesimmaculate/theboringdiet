@@ -85,9 +85,16 @@ export function OfferPopup() {
           </div>
 
           <div className="mt-6 flex justify-center">
-            <PolarCheckoutTrigger analyticsId="offer_popup_cta_click" compact className="w-full">
-              CLAIM $19 ACCESS NOW
-            </PolarCheckoutTrigger>
+            <a
+              href={POLAR_CHECKOUT_LINK}
+              onClick={() => {
+                trackEvent("offer_popup_cta_click");
+                trackFbStandard("InitiateCheckout", { content_name: "The Boring Diet", currency: "USD", value: 19 });
+              }}
+              className="btn-primary w-full !bg-gold !text-charcoal hover:!bg-gold-light !font-bold text-center"
+            >
+              CLAIM $19 ACCESS NOW →
+            </a>
           </div>
 
           <button
