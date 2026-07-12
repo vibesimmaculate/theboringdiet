@@ -112,7 +112,7 @@ function GuidePage() {
             The complete protocol — including foods, quantities and daily schedule — is inside the paid guide.
           </p>
           <div className="mt-6">
-            <PolarCheckoutTrigger>GET THE GUIDE — $19</PolarCheckoutTrigger>
+            <PolarCheckoutTrigger analyticsId="guide_cta_click">GET THE GUIDE — $19</PolarCheckoutTrigger>
           </div>
         </div>
 

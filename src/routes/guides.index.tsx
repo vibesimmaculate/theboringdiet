@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EditorialEyebrow, Folio } from "@/components/editorial/primitives";
+import { ClosingCta } from "@/components/marketing/closing-cta";
 
 export const GUIDES = [
   { slug: "what-is-a-bounded-14-day-food-experiment", title: "What is a bounded 14-day food experiment?", excerpt: "Structure, endpoints, and why boundaries matter more than novelty." },
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/guides/")({
     links: [{ rel: "canonical", href: "/guides" }],
   }),
   component: () => (
+    <>
     <section className="bg-bone paper-grain pt-24 pb-32">
       <div className="editorial-main">
         <div className="flex items-baseline justify-between">
@@ -51,5 +53,7 @@ export const Route = createFileRoute("/guides/")({
         </ol>
       </div>
     </section>
+    <ClosingCta analyticsId="guides_index_cta_click" />
+    </>
   ),
 });

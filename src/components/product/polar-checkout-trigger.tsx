@@ -40,6 +40,7 @@ export function PolarCheckoutTrigger({
   analyticsId,
   size = "primary",
   compact = false,
+  labelTone = "default",
   onCheckoutOpened,
 }: {
   className?: string;
@@ -47,6 +48,8 @@ export function PolarCheckoutTrigger({
   analyticsId?: string;
   size?: "primary" | "outline";
   compact?: boolean;
+  /** Use "invert" when the trigger sits on a dark background so the microcopy stays readable. */
+  labelTone?: "default" | "invert";
   /** Called once the embedded checkout is open (e.g. to dismiss a popup underneath). */
   onCheckoutOpened?: () => void;
 }) {
@@ -119,21 +122,23 @@ export function PolarCheckoutTrigger({
 
   if (compact) return button;
 
+  const labelColor = labelTone === "invert" ? "!text-bone/60" : "";
+
   return (
     <div className="inline-flex flex-col items-start">
       {button}
-      <OfferDeadlineLabel />
-      <div className="mono-label text-stone-dark text-[10px] mt-1">
+      <OfferDeadlineLabel className={labelColor} />
+      <div className={cn("mono-label text-stone-dark text-[10px] mt-1", labelColor)}>
         Instant delivery · No subscription · No account required
       </div>
     </div>
   );
 }
 
-function OfferDeadlineLabel() {
+function OfferDeadlineLabel({ className }: { className?: string }) {
   const { ready, hours, minutes, seconds } = useOfferCountdown();
   return (
-    <div className="mt-3 mono-label text-stone-dark tabular-nums">
+    <div className={cn("mt-3 mono-label text-stone-dark tabular-nums", className)}>
       LAUNCH OFFER · 62% OFF ·{" "}
       {ready ? (
         <>

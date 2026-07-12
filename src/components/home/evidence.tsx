@@ -45,14 +45,14 @@ export function EvidenceSection() {
               </p>
             </div>
             <div className="shrink-0">
-              <PolarCheckoutTrigger analyticsId="evidence_cta_click">
+              <PolarCheckoutTrigger analyticsId="evidence_cta_click" labelTone="invert">
                 CLAIM YOUR COPY — $19
               </PolarCheckoutTrigger>
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-bone/15 flex flex-wrap gap-x-8 gap-y-2 mono-label text-bone/60 text-[10px]">
             <span>✓ SECURE CHECKOUT VIA POLAR</span>
-            <span>✓ 14-DAY REFUND WINDOW</span>
+            <span>✓ INSTANT PDF DELIVERY</span>
             <span>✓ NO SUBSCRIPTION</span>
             <span>✓ NO ACCOUNT REQUIRED</span>
           </div>
