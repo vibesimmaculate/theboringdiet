@@ -63,7 +63,7 @@ export function BookMockup({ className, interactive = true }: { className?: stri
             className="absolute inset-0 h-full w-full object-cover"
             loading="eager"
           />
-          <div className="absolute top-3 right-3 bg-bone text-charcoal mono-label text-[9px] px-2 py-1">EDITION 1.0</div>
+          
         </div>
         {/* Page block edge */}
         <div className="absolute inset-y-2 -right-1.5 w-1.5 bg-stone" aria-hidden="true" />

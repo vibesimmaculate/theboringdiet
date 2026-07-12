@@ -59,17 +59,6 @@ export function PricingSection() {
             </div>
 
 
-            <div className="mt-10">
-              <div className="mono-label text-stone-dark">WHAT'S INCLUDED</div>
-              <ul className="mt-4 divide-y divide-stone border-y border-stone">
-                {CONTENTS.map((c) => (
-                  <li key={c} className="grid grid-cols-[auto_1fr] gap-4 py-3">
-                    <span className="mono-label text-stone-dark">—</span>
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             <HorizontalRule className="mt-10" />
           </div>
