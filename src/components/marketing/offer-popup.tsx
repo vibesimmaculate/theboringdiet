@@ -12,8 +12,52 @@ export function OfferPopup() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.sessionStorage.getItem(DISMISS_KEY)) return;
-    const t = window.setTimeout(() => setOpen(true), 1200);
-    return () => window.clearTimeout(t);
+
+    let fired = false;
+    const trigger = () => {
+      if (fired) return;
+      fired = true;
+      setOpen(true);
+    };
+
+    // Time-based fallback
+    const timer = window.setTimeout(trigger, 25000);
+
+    // Exit-intent: mouse leaves toward top of viewport (desktop)
+    const onMouseOut = (e: MouseEvent) => {
+      if (e.clientY <= 0 && !e.relatedTarget) trigger();
+    };
+
+    // Scroll-based: user scrolled past 55% of page
+    const onScroll = () => {
+      const scrolled = window.scrollY + window.innerHeight;
+      const threshold = document.documentElement.scrollHeight * 0.55;
+      if (scrolled >= threshold) trigger();
+    };
+
+    // Mobile exit-intent proxy: fast upward scroll near top
+    let lastY = window.scrollY;
+    let lastT = Date.now();
+    const onScrollMobile = () => {
+      const y = window.scrollY;
+      const t = Date.now();
+      const dy = lastY - y;
+      const dt = t - lastT;
+      if (y < 400 && dy > 120 && dt < 400) trigger();
+      lastY = y;
+      lastT = t;
+    };
+
+    document.addEventListener("mouseout", onMouseOut);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScrollMobile, { passive: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("mouseout", onMouseOut);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScrollMobile);
+    };
   }, []);
 
   const close = () => {
