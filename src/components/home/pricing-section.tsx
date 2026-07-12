@@ -2,6 +2,7 @@ import { EditorialEyebrow, Folio, HorizontalRule } from "@/components/editorial/
 import { PolarCheckoutTrigger, CheckoutSecureLabel } from "@/components/product/polar-checkout-trigger";
 import { useEffect, useRef } from "react";
 import { trackEvent } from "@/components/analytics/meta-pixel";
+import { funnelSignal } from "@/lib/funnel-report";
 
 const CONTENTS = [
   "36-page digital guide",
@@ -20,7 +21,15 @@ export function PricingSection() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && trackEvent("pricing_view"), { threshold: 0.4 });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          trackEvent("pricing_view");
+          funnelSignal({ name: "pricing_view" });
+        }
+      },
+      { threshold: 0.4 },
+    );
     io.observe(ref.current);
     return () => io.disconnect();
   }, []);

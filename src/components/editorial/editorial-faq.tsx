@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/components/analytics/meta-pixel";
+import { funnelSignal } from "@/lib/funnel-report";
 
 export type FAQ = { q: string; a: string };
 
@@ -15,7 +16,11 @@ export function EditorialFAQ({ items, defaultOpen = 0 }: { items: FAQ[]; default
     setOpen((s) => {
       const n = new Set(s);
       if (n.has(i)) n.delete(i);
-      else { n.add(i); trackEvent("faq_opened", { index: i }); }
+      else {
+        n.add(i);
+        trackEvent("faq_opened", { index: i });
+        funnelSignal({ name: "faq_open", question: items[i]?.q ?? "" });
+      }
       return n;
     });
   };
