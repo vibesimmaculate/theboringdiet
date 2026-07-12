@@ -18,15 +18,15 @@ export function useOfferCountdown() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const deadline = getDeadline();
+    let deadline = getDeadline();
     setReady(true);
     const tick = () => {
       const r = Math.max(0, deadline - Date.now());
       setRemaining(r);
       if (r === 0) {
-        // reset for continuous urgency
-        const next = Date.now() + DURATION_MS;
-        window.localStorage.setItem(KEY, String(next));
+        // reset for continuous urgency (and keep ticking from the new deadline)
+        deadline = Date.now() + DURATION_MS;
+        window.localStorage.setItem(KEY, String(deadline));
       }
     };
     tick();

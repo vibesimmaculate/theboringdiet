@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { EditorialEyebrow, Folio, LoadingState } from "@/components/editorial/primitives";
 import { verifyPurchase } from "@/lib/polar-verify.functions";
+import { markPurchased } from "@/lib/checkout-state";
 import { BRAND, CUSTOMER_PORTAL_URL } from "@/config/brand";
 import { z } from "zod";
 
@@ -35,8 +36,8 @@ function SuccessPage() {
     if (!checkout_id && !order_id) { setStatus("failed"); return; }
     verifyPurchase({ data: { checkoutId: checkout_id, orderId: order_id } })
       .then((r) => {
-        if (r.status === "success") { setStatus("success"); setOrderId(r.orderId); }
-        else if (r.status === "pending") setStatus("pending");
+        if (r.status === "success") { setStatus("success"); setOrderId(r.orderId); markPurchased(); }
+        else if (r.status === "pending") { setStatus("pending"); markPurchased(); }
         else if (r.status === "wrong_product") setStatus("wrong_product");
         else setStatus("failed");
       })

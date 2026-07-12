@@ -57,9 +57,9 @@ export function SiteHeader() {
           <PolarCheckoutTrigger
             compact
             analyticsId="header_cta_click"
-            className="!min-h-[40px] !py-2 !px-3 text-[10px]"
+            className="!min-h-[40px] !py-2 !px-3 !text-[11px] !font-bold"
           >
-            $19
+            GET IT · $19
           </PolarCheckoutTrigger>
 
           <button
