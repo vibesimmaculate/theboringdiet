@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { trackEvent, trackFbStandard } from "@/components/analytics/meta-pixel";
 import { isCheckoutOpen, markCheckoutClosed, markCheckoutOpen, markPurchased } from "@/lib/checkout-state";
 import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { funnelSignal } from "@/lib/funnel-report";
 
 type PolarEmbed = {
   create: (url: string, theme?: "light" | "dark") => Promise<{
@@ -72,16 +73,21 @@ export function PolarCheckoutTrigger({
       markCheckoutOpen();
       trackEvent("polar_checkout_loaded");
       trackFbStandard("InitiateCheckout", { content_name: "The Boring Diet", currency: "USD", value: 19 });
+      funnelSignal({ name: "checkout_opened" });
       onCheckoutOpened?.();
+      let confirmed = false;
       checkout.addEventListener("close", () => {
         markCheckoutClosed();
         trackEvent("polar_checkout_closed");
+        if (!confirmed) funnelSignal({ name: "checkout_abandoned" });
         setLoading(false);
         btnRef.current?.focus();
       });
       checkout.addEventListener("confirmed", () => {
+        confirmed = true;
         markPurchased();
         trackEvent("polar_checkout_confirmed");
+        funnelSignal({ name: "purchase_confirmed" });
       });
     } catch (err) {
       console.error("Polar checkout failed to load", err);
@@ -102,7 +108,10 @@ export function PolarCheckoutTrigger({
     <button
       ref={btnRef}
       onClick={onClick}
-      onPointerEnter={() => preloadPolarEmbed()}
+      onPointerEnter={() => {
+        preloadPolarEmbed();
+        funnelSignal({ name: "cta_hover" });
+      }}
       onFocus={() => preloadPolarEmbed()}
       disabled={loading}
       aria-busy={loading}

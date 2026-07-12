@@ -40,6 +40,7 @@ export const SITE = {
 
 // Routes where promotional surfaces (exit popup, sticky dock) must stay quiet.
 export const NO_PROMO_ROUTES = [
+  "/admin",
   "/success",
   "/payment-cancelled",
   "/safety",

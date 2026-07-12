@@ -15,6 +15,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { OfferBar } from "@/components/marketing/offer-bar";
 import { OfferPopup } from "@/components/marketing/offer-popup";
 import { StickyPurchaseDock } from "@/components/layout/sticky-purchase-dock";
+import { FunnelTracker } from "@/components/marketing/funnel-tracker";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { MetaPixel } from "@/components/analytics/meta-pixel";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
@@ -153,6 +154,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <MetaPixel />
+      <FunnelTracker />
       <OfferBar />
       <SiteHeader />
       <main id="main">
