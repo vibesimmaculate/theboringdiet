@@ -62,12 +62,14 @@ export function OfferPopup() {
             <span className="font-serif italic font-medium">before it's gone</span><span className="text-gold">.</span>
           </h2>
 
-          <div className="mt-5 flex items-baseline justify-center gap-3">
+          <div className="mt-5 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
+            <span className="mono-label text-stone-dark text-[10px]">WAS</span>
             <span className="font-display text-2xl text-stone-dark line-through">$50</span>
-            <span className="font-display text-5xl font-semibold text-charcoal">
+            <span className="mono-label text-stone-dark text-[10px]">NOW</span>
+            <span className="font-display text-5xl font-bold text-charcoal">
               $19
             </span>
-            <span className="mono-label text-gold text-[11px]">−62%</span>
+            <span className="mono-label text-gold text-[11px] font-bold">SAVE $31 · −62%</span>
           </div>
 
           <div className="mt-5 border-t border-b border-stone py-4">
