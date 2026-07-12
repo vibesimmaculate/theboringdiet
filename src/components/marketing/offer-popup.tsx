@@ -43,7 +43,6 @@ export function OfferPopup() {
       const now = performance.now();
       const dt = Math.max(1, now - lastT);
       vy = (e.clientY - lastY) / dt;
-      lastX = e.clientX;
       lastY = e.clientY;
       lastT = now;
 
