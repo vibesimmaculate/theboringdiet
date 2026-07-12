@@ -1,8 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { BookMockup } from "@/components/editorial/book-mockup";
 import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
-import { EditorialEyebrow, Folio } from "@/components/editorial/primitives";
-import { Link } from "@tanstack/react-router";
+import { EditorialEyebrow } from "@/components/editorial/primitives";
 
 export function Hero() {
   const reduced = useReducedMotion();
