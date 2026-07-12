@@ -136,8 +136,9 @@ export function PolarCheckoutTrigger({
   return (
     <div className="inline-flex flex-col items-start">
       {button}
-      <OfferDeadlineLabel className={labelColor} />
-      <div className={cn("mono-label text-stone-dark text-[10px] mt-1", labelColor)}>
+      {/* Supporting microcopy is desktop-only — on mobile it eats too much space. */}
+      <OfferDeadlineLabel className={cn("hidden sm:block", labelColor)} />
+      <div className={cn("mono-label text-stone-dark text-[10px] mt-1 hidden sm:block", labelColor)}>
         Instant delivery · No subscription · No account required
       </div>
     </div>

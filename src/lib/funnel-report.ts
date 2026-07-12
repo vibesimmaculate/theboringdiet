@@ -1,6 +1,7 @@
 import { recordFunnelEvent } from "@/lib/funnel.functions";
 import { recordSignal, getIntentState, getIntentTier, getDominantObjection, type Signal } from "@/lib/intent-engine";
 import { getTrafficInfo } from "@/lib/traffic-source";
+import { getVisitorId } from "@/lib/visitor-id";
 import { trackEvent } from "@/components/analytics/meta-pixel";
 
 /** Signals worth shipping to the admin live feed (everything still scores locally). */
@@ -38,6 +39,7 @@ export function funnelSignal(signal: Signal) {
     tier: getIntentTier(state.score),
     objection: getDominantObjection(state),
     score: state.score,
+    visitorId: getVisitorId(),
   };
 
   if (signal.name !== "page_view" && signal.name !== "session_start") {
