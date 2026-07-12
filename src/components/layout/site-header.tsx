@@ -48,8 +48,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <PolarCheckoutTrigger compact analyticsId="header_cta_click">
-            GET THE PROTOCOL — $19
+          <PolarCheckoutTrigger compact analyticsId="header_cta_click" className="!bg-gold !text-charcoal hover:!bg-gold-light !font-bold">
+            GET IT · <span className="line-through opacity-60 ml-1">$50</span> <span className="ml-1">$19</span>
           </PolarCheckoutTrigger>
         </div>
 
