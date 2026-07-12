@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EditorialFAQ } from "@/components/editorial/editorial-faq";
 import { HOME_FAQ } from "@/components/home/faq-section";
 import { EditorialEyebrow, Folio } from "@/components/editorial/primitives";
+import { ClosingCta } from "@/components/marketing/closing-cta";
 
 const faqLd = {
   "@context": "https://schema.org",
@@ -38,22 +39,25 @@ export const Route = createFileRoute("/faq")({
     ],
   }),
   component: () => (
-    <section className="bg-bone paper-grain pt-24 pb-32">
-      <div className="editorial-main">
-        <div className="flex items-baseline justify-between">
-          <EditorialEyebrow>QUESTIONS</EditorialEyebrow>
-          <Folio>THE BORING DIET · FAQ</Folio>
+    <>
+      <section className="bg-bone paper-grain pt-24 pb-32">
+        <div className="editorial-main">
+          <div className="flex items-baseline justify-between">
+            <EditorialEyebrow>QUESTIONS</EditorialEyebrow>
+            <Folio>THE BORING DIET · FAQ</Folio>
+          </div>
+          <h1 className="mt-6 h-display">
+            FREQUENTLY<br />ASKED<span className="text-gold">.</span>
+          </h1>
+          <p className="mt-8 text-charcoal-soft max-w-xl">
+            Every answer is publicly available and rendered in the page HTML.
+          </p>
+          <div className="mt-16">
+            <EditorialFAQ items={HOME_FAQ} />
+          </div>
         </div>
-        <h1 className="mt-6 h-display">
-          FREQUENTLY<br />ASKED<span className="text-gold">.</span>
-        </h1>
-        <p className="mt-8 text-charcoal-soft max-w-xl">
-          Every answer is publicly available and rendered in the page HTML.
-        </p>
-        <div className="mt-16">
-          <EditorialFAQ items={HOME_FAQ} />
-        </div>
-      </div>
-    </section>
+      </section>
+      <ClosingCta analyticsId="faq_page_cta_click" />
+    </>
   ),
 });

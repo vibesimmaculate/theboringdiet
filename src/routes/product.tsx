@@ -4,6 +4,7 @@ import { PricingSection } from "@/components/home/pricing-section";
 import { SafetySpread } from "@/components/home/safety-spread";
 import { EditorialEyebrow, Folio, FactTable } from "@/components/editorial/primitives";
 import { BookMockup } from "@/components/editorial/book-mockup";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
 
 const productLd = {
   "@context": "https://schema.org",
@@ -62,6 +63,9 @@ function ProductPage() {
             <p className="mt-8 max-w-xl text-lg text-charcoal-soft leading-relaxed">
               {BRAND.longDescription}
             </p>
+            <div className="mt-8">
+              <PolarCheckoutTrigger analyticsId="product_hero_cta_click">GET INSTANT ACCESS — $19</PolarCheckoutTrigger>
+            </div>
             <div className="mt-10 max-w-lg">
               <FactTable rows={FACTS} emphasizeValues />
             </div>

@@ -4,6 +4,7 @@ import { ContrarianChapter } from "@/components/home/contrarian-chapter";
 import { CoreMechanism } from "@/components/home/core-mechanism";
 import { Manifesto } from "@/components/home/manifesto";
 import { DirectAnswer } from "@/components/editorial/primitives";
+import { ClosingCta } from "@/components/marketing/closing-cta";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/how-it-works")({
       <TimelineSection />
       <HowItWorksSection />
       <Manifesto />
+      <ClosingCta analyticsId="how_it_works_cta_click" />
     </>
   ),
 });

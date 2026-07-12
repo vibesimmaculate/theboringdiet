@@ -1,4 +1,5 @@
 import { EditorialEyebrow } from "@/components/editorial/primitives";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
 
 const PAGES = [
   { n: "01", t: "THE EXACT PROTOCOL", d: "What is allowed, excluded and how the boundaries work." },
@@ -34,6 +35,15 @@ export function WhatsInsideArchive() {
             </li>
           ))}
         </ul>
+
+        <div className="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-charcoal-soft">
+            All eight sections. One PDF. <span className="font-semibold text-charcoal">Delivered the second you pay.</span>
+          </p>
+          <PolarCheckoutTrigger compact analyticsId="whats_inside_cta_click" className="!font-bold">
+            GET THE COMPLETE SYSTEM — $19
+          </PolarCheckoutTrigger>
+        </div>
       </div>
     </section>
   );

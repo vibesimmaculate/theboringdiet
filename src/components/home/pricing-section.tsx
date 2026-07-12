@@ -60,6 +60,18 @@ export function PricingSection() {
 
 
 
+            <div className="mt-10">
+              <div className="mono-label text-stone-dark">EVERYTHING INCLUDED · NOTHING SOLD SEPARATELY</div>
+              <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2.5">
+                {CONTENTS.map((c) => (
+                  <li key={c} className="flex items-baseline gap-3 text-sm text-charcoal-soft">
+                    <span className="text-gold font-bold shrink-0">✓</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <HorizontalRule className="mt-10" />
           </div>
 
@@ -67,7 +79,7 @@ export function PricingSection() {
           <div className="bg-charcoal text-bone px-6 sm:px-12 md:px-16 py-10">
             <CheckoutSecureLabel />
             <div className="mt-4">
-              <PolarCheckoutTrigger analyticsId="pricing_cta_click">GET THE BORING DIET — $19</PolarCheckoutTrigger>
+              <PolarCheckoutTrigger analyticsId="pricing_cta_click" labelTone="invert">GET THE BORING DIET — $19</PolarCheckoutTrigger>
             </div>
             <p className="mt-6 text-bone/70 text-sm max-w-xl">
               Secure checkout and digital delivery through Polar. No subscription · No account required · Instant digital access.

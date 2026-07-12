@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EditorialEyebrow, FactTable, Folio } from "@/components/editorial/primitives";
 import { BRAND, SITE } from "@/config/brand";
+import { ClosingCta } from "@/components/marketing/closing-cta";
 
 const FACTS = [
   { k: "BRAND", v: "The Boring Diet" },
@@ -36,6 +37,7 @@ export const Route = createFileRoute("/about")({
     })}],
   }),
   component: () => (
+    <>
     <section className="bg-bone paper-grain pt-24 pb-32">
       <div className="editorial-main">
         <div className="flex items-baseline justify-between">
@@ -66,5 +68,7 @@ export const Route = createFileRoute("/about")({
         </div>
       </div>
     </section>
+    <ClosingCta analyticsId="about_cta_click" />
+    </>
   ),
 });

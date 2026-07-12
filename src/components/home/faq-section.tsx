@@ -1,5 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import { EditorialFAQ, type FAQ } from "@/components/editorial/editorial-faq";
 import { EditorialEyebrow } from "@/components/editorial/primitives";
+import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
 
 export const HOME_FAQ: FAQ[] = [
   { q: "What is The Boring Diet?", a: "The Boring Diet is a 36-page digital publication containing a structured, time-limited 14-day eating experiment. It includes exact operating boundaries, a complete daily schedule, preparation guidance, troubleshooting information, a structured exit and safety limitations." },
@@ -33,6 +35,19 @@ export function HomeFaqSection() {
           </div>
           <div className="col-span-12 md:col-span-8">
             <EditorialFAQ items={TOP_FAQ} />
+
+            <div className="mt-10 border-t border-charcoal pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+              <div>
+                <div className="font-display text-xl">Question answered? Good<span className="text-gold">.</span></div>
+                <p className="mt-1 text-sm text-stone-dark">
+                  Instant delivery either way — or{" "}
+                  <Link to="/faq" className="underline hover:text-charcoal">read the full FAQ</Link>.
+                </p>
+              </div>
+              <PolarCheckoutTrigger compact analyticsId="faq_cta_click" className="!font-bold shrink-0">
+                GET IT NOW — $19
+              </PolarCheckoutTrigger>
+            </div>
           </div>
         </div>
       </div>

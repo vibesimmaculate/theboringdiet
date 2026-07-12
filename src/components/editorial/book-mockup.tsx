@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import coverAsset from "@/assets/cover.png.asset.json";
+import coverUrl from "@/assets/cover.webp";
 
 /** A restrained CSS 3D editorial publication object. */
 export function BookMockup({ className, interactive = true }: { className?: string; interactive?: boolean }) {
@@ -49,7 +49,7 @@ export function BookMockup({ className, interactive = true }: { className?: stri
         <div className="absolute inset-0 bg-charcoal border border-charcoal shadow-[0_30px_60px_-30px_rgba(17,17,17,0.55)] overflow-hidden" style={{ transform: "translateZ(6px)" }}>
           {!coverUnavailable && (
             <img
-              src={coverAsset.url}
+              src={coverUrl}
               alt="The Boring Diet edition 1.0 cover"
               className="absolute inset-0 h-full w-full object-cover"
               loading="eager"
