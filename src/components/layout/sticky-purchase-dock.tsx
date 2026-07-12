@@ -2,23 +2,31 @@ import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { PolarCheckoutTrigger } from "@/components/product/polar-checkout-trigger";
-
-
-const HIDE_ROUTES = ["/success", "/payment-cancelled", "/safety", "/privacy", "/terms", "/refunds", "/disclaimer", "/contact"];
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { hasPurchased } from "@/lib/checkout-state";
+import { NO_PROMO_ROUTES } from "@/config/brand";
 
 export function StickyPurchaseDock() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [visible, setVisible] = useState(false);
+  const { ready, hours, minutes, seconds } = useOfferCountdown();
 
   useEffect(() => {
+    if (hasPurchased()) return; // buyers don't need a purchase dock
     const onScroll = () => setVisible(window.scrollY > 300);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const hidden = HIDE_ROUTES.some((r) => pathname === r || pathname.startsWith(r + "/"));
+  const hidden = NO_PROMO_ROUTES.some((r) => pathname === r || pathname.startsWith(r + "/"));
   if (hidden) return null;
+
+  const countdown = ready ? (
+    <span className="tabular-nums">{hours}:{minutes}:{seconds}</span>
+  ) : (
+    "SOON"
+  );
 
   return (
     <AnimatePresence>
@@ -33,7 +41,7 @@ export function StickyPurchaseDock() {
             className="hidden md:flex fixed bottom-6 right-6 z-30 items-center gap-4 bg-charcoal text-bone px-5 py-3 border border-gold/40 shadow-2xl rounded-md"
           >
             <div>
-              <div className="mono-label text-gold leading-tight">🔥 LAUNCH OFFER · SAVE $31</div>
+              <div className="mono-label text-gold leading-tight">🔥 SAVE $31 · ENDS IN {countdown}</div>
               <div className="font-display text-sm leading-tight mt-0.5">
                 <span className="opacity-70 mr-1">was</span>
                 <span className="line-through opacity-60 mr-2">$50</span>
@@ -49,7 +57,6 @@ export function StickyPurchaseDock() {
             >
               GET IT NOW →
             </PolarCheckoutTrigger>
-
           </motion.div>
 
           {/* Mobile bottom bar */}
@@ -61,10 +68,11 @@ export function StickyPurchaseDock() {
             className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-charcoal text-bone flex items-center justify-between px-4 py-3 pb-[max(env(safe-area-inset-bottom),12px)] border-t border-gold/40 shadow-2xl"
           >
             <div>
-              <div className="mono-label text-gold leading-tight text-[10px]">🔥 SAVE $31 · ENDS SOON</div>
+              <div className="mono-label text-gold leading-tight text-[10px]">🔥 SAVE $31 · ENDS IN {countdown}</div>
               <div className="font-display text-base leading-tight mt-0.5">
                 <span className="line-through opacity-60 mr-1 text-sm">$50</span>
                 <span className="text-gold font-bold">$19</span>
+                <span className="opacity-70 text-sm"> · one time</span>
               </div>
             </div>
             <PolarCheckoutTrigger
@@ -72,7 +80,6 @@ export function StickyPurchaseDock() {
               analyticsId="sticky_cta_click"
               className="!bg-gold !text-charcoal !px-5 !py-3 !min-h-[48px] !font-bold"
             >GET IT →</PolarCheckoutTrigger>
-
           </motion.div>
         </>
       )}

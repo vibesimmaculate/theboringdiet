@@ -38,6 +38,18 @@ export const SITE = {
     (typeof process !== "undefined" && process.env?.GOVERNING_LAW) || "[GOVERNING LAW]",
 };
 
+// Routes where promotional surfaces (exit popup, sticky dock) must stay quiet.
+export const NO_PROMO_ROUTES = [
+  "/success",
+  "/payment-cancelled",
+  "/safety",
+  "/privacy",
+  "/terms",
+  "/refunds",
+  "/disclaimer",
+  "/contact",
+] as const;
+
 export const NAV = [
   { label: "The Idea", href: "/how-it-works" },
   { label: "Evidence", href: "/evidence" },

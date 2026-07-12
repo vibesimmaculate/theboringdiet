@@ -1,7 +1,9 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { POLAR_CHECKOUT_LINK } from "@/config/brand";
 import { cn } from "@/lib/utils";
 import { trackEvent, trackFbStandard } from "@/components/analytics/meta-pixel";
+import { isCheckoutOpen, markCheckoutClosed, markCheckoutOpen, markPurchased } from "@/lib/checkout-state";
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
 
 type PolarEmbed = {
   create: (url: string, theme?: "light" | "dark") => Promise<{
@@ -10,6 +12,23 @@ type PolarEmbed = {
   }>;
   init: () => void;
 };
+
+type PolarEmbedModule = { PolarEmbedCheckout: PolarEmbed };
+
+// Preload the embed chunk once per page so the first CTA click opens
+// instantly instead of waiting on a network fetch.
+let embedModule: Promise<PolarEmbedModule> | null = null;
+
+export function preloadPolarEmbed(): Promise<PolarEmbedModule> {
+  if (!embedModule) {
+    embedModule = import("@polar-sh/checkout/embed") as unknown as Promise<PolarEmbedModule>;
+    // If the preload fails (offline blip), allow a retry on the next call.
+    embedModule.catch(() => {
+      embedModule = null;
+    });
+  }
+  return embedModule;
+}
 
 /**
  * A universal Polar checkout trigger — opens the embedded Polar checkout
@@ -21,38 +40,52 @@ export function PolarCheckoutTrigger({
   analyticsId,
   size = "primary",
   compact = false,
+  onCheckoutOpened,
 }: {
   className?: string;
   children?: ReactNode;
   analyticsId?: string;
   size?: "primary" | "outline";
   compact?: boolean;
+  /** Called once the embedded checkout is open (e.g. to dismiss a popup underneath). */
+  onCheckoutOpened?: () => void;
 }) {
   const [loading, setLoading] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    if (typeof w.requestIdleCallback === "function") w.requestIdleCallback(() => preloadPolarEmbed());
+    else window.setTimeout(() => preloadPolarEmbed(), 1200);
+  }, []);
+
   const onClick = async () => {
-    if (loading) return;
+    if (loading || isCheckoutOpen()) return;
     setLoading(true);
     if (analyticsId) trackEvent(analyticsId);
     try {
-      const mod = (await import("@polar-sh/checkout/embed")) as unknown as {
-        PolarEmbedCheckout: PolarEmbed;
-      };
+      const mod = await preloadPolarEmbed();
       const checkout = await mod.PolarEmbedCheckout.create(POLAR_CHECKOUT_LINK, "dark");
+      markCheckoutOpen();
       trackEvent("polar_checkout_loaded");
       trackFbStandard("InitiateCheckout", { content_name: "The Boring Diet", currency: "USD", value: 19 });
+      onCheckoutOpened?.();
       checkout.addEventListener("close", () => {
+        markCheckoutClosed();
         trackEvent("polar_checkout_closed");
         setLoading(false);
         btnRef.current?.focus();
       });
       checkout.addEventListener("confirmed", () => {
+        markPurchased();
         trackEvent("polar_checkout_confirmed");
       });
     } catch (err) {
       console.error("Polar checkout failed to load", err);
-      setLoading(false);
+      // Never leave the buyer with a dead button — fall back to the hosted checkout.
+      trackEvent("polar_checkout_fallback_redirect");
+      trackFbStandard("InitiateCheckout", { content_name: "The Boring Diet", currency: "USD", value: 19 });
+      window.location.assign(POLAR_CHECKOUT_LINK);
     }
   };
 
@@ -66,6 +99,8 @@ export function PolarCheckoutTrigger({
     <button
       ref={btnRef}
       onClick={onClick}
+      onPointerEnter={() => preloadPolarEmbed()}
+      onFocus={() => preloadPolarEmbed()}
       disabled={loading}
       aria-busy={loading}
       data-analytics={analyticsId}
@@ -87,9 +122,7 @@ export function PolarCheckoutTrigger({
   return (
     <div className="inline-flex flex-col items-start">
       {button}
-      <div className="mt-3 mono-label text-stone-dark">
-        LAUNCH OFFER · 62% OFF · ENDS SOON
-      </div>
+      <OfferDeadlineLabel />
       <div className="mono-label text-stone-dark text-[10px] mt-1">
         Instant delivery · No subscription · No account required
       </div>
@@ -97,7 +130,21 @@ export function PolarCheckoutTrigger({
   );
 }
 
-
+function OfferDeadlineLabel() {
+  const { ready, hours, minutes, seconds } = useOfferCountdown();
+  return (
+    <div className="mt-3 mono-label text-stone-dark tabular-nums">
+      LAUNCH OFFER · 62% OFF ·{" "}
+      {ready ? (
+        <>
+          ENDS IN <span className="text-gold font-semibold">{hours}:{minutes}:{seconds}</span>
+        </>
+      ) : (
+        "ENDS SOON"
+      )}
+    </div>
+  );
+}
 
 export function CheckoutSecureLabel() {
   return <div className="mono-label text-stone-dark">SECURE CHECKOUT · POWERED BY POLAR</div>;
