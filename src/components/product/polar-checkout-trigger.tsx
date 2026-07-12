@@ -73,7 +73,7 @@ export function PolarCheckoutTrigger({
     >
       {loading ? (
         <>
-          <span className="inline-block w-3 h-3 border border-bone border-t-transparent rounded-full animate-spin" />
+          <span className="inline-block w-3 h-3 border border-charcoal border-t-transparent rounded-full animate-spin" />
           OPENING…
         </>
       ) : (
