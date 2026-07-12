@@ -16,14 +16,9 @@ export function OfferPopup() {
     let fired = false;
     let armed = false; // require some engagement before we're allowed to fire
     const startedAt = Date.now();
-    const ARM_AFTER_MS = 4000;      // don't fire in the first 4s (avoids bounce-in triggers)
+    const ARM_AFTER_MS = 1500;      // brief delay so it never fires on page load
     const FALLBACK_MS = 45000;      // last-resort auto-open
-    const SCROLL_DEPTH_PCT = 0.6;   // % of page scrolled
-
-    // Track pointer velocity for a smarter desktop exit-intent
-    let lastY = 0;
-    let lastT = performance.now();
-    let vy = 0; // vertical velocity px/ms (negative = moving up)
+    const SCROLL_DEPTH_PCT = 0.55;  // fraction of page scrolled
 
     const trigger = (reason: string) => {
       if (fired || !armed) return;
@@ -36,53 +31,35 @@ export function OfferPopup() {
     const armTimer = window.setTimeout(() => { armed = true; }, ARM_AFTER_MS);
     const fallbackTimer = window.setTimeout(() => { armed = true; trigger("timeout"); }, FALLBACK_MS);
 
-    // Desktop: pointer moves quickly upward AND leaves through the top edge.
-    // pointerleave on document is more reliable than mouseout for detecting real exits.
-    const onPointerMove = (e: PointerEvent) => {
-      if (e.pointerType && e.pointerType !== "mouse") return;
-      const now = performance.now();
-      const dt = Math.max(1, now - lastT);
-      vy = (e.clientY - lastY) / dt;
-      lastY = e.clientY;
-      lastT = now;
-
-      // Fast upward motion while already near the top → likely heading for tab/close button
-      if (armed && e.clientY < 60 && vy < -0.35) {
-        trigger("pointer_velocity_top");
-      }
+    // --- Desktop exit-intent -------------------------------------------------
+    // The reliable signal: mouseout on document with no relatedTarget and y<=0
+    // (mouse crossed the top edge of the viewport toward tab/close/URL bar).
+    const onMouseOut = (e: MouseEvent) => {
+      const to = (e.relatedTarget || (e as unknown as { toElement?: Node }).toElement) as Node | null;
+      if (to) return; // moved to another element inside the page
+      if (e.clientY <= 0) trigger("mouse_leave_top");
+    };
+    // Extra safety: mouseleave on the html element (fires when the cursor
+    // actually leaves the viewport, not just an internal element).
+    const onDocMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) trigger("doc_mouse_leave_top");
     };
 
-    const onPointerLeave = (e: PointerEvent) => {
-      if (e.pointerType && e.pointerType !== "mouse") return;
-      // Only count exits through the top of the viewport
-      if (e.clientY <= 0) trigger("pointer_leave_top");
-    };
-
-    // Tab-switching / minimizing is also a form of leaving on desktop
+    // Tab-switching / minimizing = leaving. Fire immediately on hide so it's
+    // waiting for them when they return.
     const onVisibility = () => {
-      if (document.visibilityState === "hidden" && Date.now() - startedAt > ARM_AFTER_MS) {
-        // Arm on first hide so returning to the tab shows the offer immediately
-        armed = true;
-        // Fire when they come back so it isn't hidden behind their other tab
-        const onReturn = () => {
-          if (document.visibilityState === "visible") {
-            document.removeEventListener("visibilitychange", onReturn);
-            trigger("tab_return");
-          }
-        };
-        document.addEventListener("visibilitychange", onReturn);
-      }
+      if (document.visibilityState === "hidden") trigger("tab_hidden");
     };
 
-    // Deep-scroll intent (works everywhere including mobile)
+    // --- Deep-scroll intent (all devices) -----------------------------------
     const onScroll = () => {
       const doc = document.documentElement;
       const scrolled = window.scrollY + window.innerHeight;
       const threshold = doc.scrollHeight * SCROLL_DEPTH_PCT;
-      if (armed && scrolled >= threshold) trigger("scroll_depth");
+      if (scrolled >= threshold) trigger("scroll_depth");
     };
 
-    // Mobile exit proxy: fast upward flick near top of page (heading for address bar / back)
+    // --- Mobile exit proxy: fast upward flick near top of page --------------
     let mLastY = window.scrollY;
     let mLastT = Date.now();
     const onScrollMobile = () => {
@@ -90,18 +67,17 @@ export function OfferPopup() {
       const t = Date.now();
       const dy = mLastY - y;
       const dt = t - mLastT;
-      if (armed && y < 300 && dy > 180 && dt < 350) trigger("mobile_flick_up");
+      if (y < 300 && dy > 150 && dt < 400) trigger("mobile_flick_up");
       mLastY = y;
       mLastT = t;
     };
 
-    // History back-button intent (mobile especially)
+    // --- History back-button intent -----------------------------------------
     const onPopState = () => trigger("history_back");
-    // Push a state so first back press fires us instead of leaving the site (once).
     try { window.history.pushState({ tbdOffer: 1 }, ""); } catch { /* ignore */ }
 
-    document.addEventListener("pointermove", onPointerMove, { passive: true });
-    document.addEventListener("pointerleave", onPointerLeave);
+    document.addEventListener("mouseout", onMouseOut);
+    document.documentElement.addEventListener("mouseleave", onDocMouseLeave);
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("scroll", onScrollMobile, { passive: true });
@@ -110,13 +86,14 @@ export function OfferPopup() {
     function cleanup() {
       window.clearTimeout(armTimer);
       window.clearTimeout(fallbackTimer);
-      document.removeEventListener("pointermove", onPointerMove);
-      document.removeEventListener("pointerleave", onPointerLeave);
+      document.removeEventListener("mouseout", onMouseOut);
+      document.documentElement.removeEventListener("mouseleave", onDocMouseLeave);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("scroll", onScrollMobile);
       window.removeEventListener("popstate", onPopState);
     }
+
 
     return cleanup;
   }, []);
