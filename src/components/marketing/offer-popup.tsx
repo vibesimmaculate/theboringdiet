@@ -15,7 +15,7 @@ export function OfferPopup() {
 
     let fired = false;
     let armed = false; // require some engagement before we're allowed to fire
-    const startedAt = Date.now();
+    
     const ARM_AFTER_MS = 1500;      // brief delay so it never fires on page load
     const FALLBACK_MS = 45000;      // last-resort auto-open
     const SCROLL_DEPTH_PCT = 0.55;  // fraction of page scrolled
