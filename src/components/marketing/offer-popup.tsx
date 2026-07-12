@@ -21,7 +21,6 @@ export function OfferPopup() {
     const SCROLL_DEPTH_PCT = 0.6;   // % of page scrolled
 
     // Track pointer velocity for a smarter desktop exit-intent
-    let lastX = 0;
     let lastY = 0;
     let lastT = performance.now();
     let vy = 0; // vertical velocity px/ms (negative = moving up)
