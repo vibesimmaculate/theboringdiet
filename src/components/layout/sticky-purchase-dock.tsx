@@ -35,8 +35,9 @@ export function StickyPurchaseDock() {
             <div>
               <div className="mono-label text-gold leading-tight">🔥 LAUNCH OFFER · SAVE $31</div>
               <div className="font-display text-sm leading-tight mt-0.5">
-                <span className="line-through opacity-60 mr-1">$50</span>
                 <span className="opacity-70 mr-1">was</span>
+                <span className="line-through opacity-60 mr-2">$50</span>
+                <span className="opacity-70 mr-1">now</span>
                 <span className="text-gold font-bold">$19</span>
                 <span className="opacity-70"> · ONE TIME</span>
               </div>
